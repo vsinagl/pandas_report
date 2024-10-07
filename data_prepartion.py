@@ -34,7 +34,6 @@ excel_file = 'logio.xlsx'
 #creating df_ciselnky and df_kusovnik dataframe
 df_ciselniky = pd.read_excel(excel_file, sheet_name='ciselniky',usecols='G:H', skiprows=1)
 df_kusovnik = pd.read_excel(excel_file, sheet_name='matice_vyroby')
-
 # extracting manufacturing data from csv_excel file
 wb = op.load_workbook(excel_file)
 sheet = wb['vyroba_text']
@@ -42,7 +41,7 @@ sheet = wb['vyroba_text']
 #creating data frame vyroba
 csv_data = get_csv_data(sheet)
 df_vyroba = pd.DataFrame(csv_data[1:], columns=csv_data[0])
-# Converting datatypes (daful is object)
+# Converting datatypes (default is object)
 df_vyroba['Datum'] = df_vyroba['Datum'].apply(date_parser)
 df_vyroba['Mnozstvi'] = pd.to_numeric(df_vyroba['Mnozstvi'],).astype('Int64')
 # Adding colum 'mesic;
